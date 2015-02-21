@@ -1,0 +1,29 @@
+To compile:
+> navigate to workspace directory
+>type
+  g++ -std=c++0x main.cpp
+>if no errors, run program using
+  ./a.out
+  
+  
+BASIC GIT COMMANDS
+>To stage files for commit
+  git add <filename>
+>To save changes locally
+  git commit -m "<short description of change>"
+>To push committed changes to remote git (make sure you're on the right branch)
+  git push
+>To create a new branch
+  git branch <branch name>
+>To navigate to a branch
+  git checkout <branch name>
+> To set upstream branch on a new branch
+  git push --set-upstream origin <branch name>
+  
+
+CHANGES
+  20150218 - (Eric) Created working Date class. string copy constructor still doesn't work (outside of VS) but that's okay just turn
+  stuff like Date newDate = "20150218"; into something like Date newDate; newDate = "20150218"; All inequality operators turn Date objects into
+  integers and compare them. (Most recent git push to newDate_h branch)
+  
+  20150219 - (John) Created two classes for the assigned and completed assignments. Changed the assignment.h to a struct. Created a linked list class. Looked at the doubly linked list source code on blakcboard and implemented functions needed. Removed non necessary files or duplicates. 
