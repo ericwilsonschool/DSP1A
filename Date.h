@@ -1,9 +1,11 @@
 
-A Class for Providing Date Objects
+//A Class for Providing Date Objects
 
-#include < stream.h >
+#include < iostream >
 #include < math.h >
 #include < stdlib.h >
+
+using namespace std;
 
 int max (int a, int b)
 {
