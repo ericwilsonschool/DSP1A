@@ -1,4 +1,4 @@
-#include "menu.cpp"
+#include "menu.h"
 #include "Date.h"
 #include <list>
 
@@ -11,8 +11,8 @@ int main()
 {
 	cout << "DSProject1A: Homework Tracker\n";
 
-	testDate();
-    //mainMenu();
+	//testDate();
+    mainMenu();
 	system("pause");
 	return 0;
 }

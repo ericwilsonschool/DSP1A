@@ -135,3 +135,10 @@ ostream& operator<< (ostream& out, Date& date)
 		<< setfill('0') << setw(2) << date.d;
 	return out;
 }
+bool Date::operator==(const int& other)
+{
+	if ((this->toInt()) == other)
+		return true;
+	else
+		return false;
+}

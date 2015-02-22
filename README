@@ -26,4 +26,17 @@ CHANGES
   stuff like Date newDate = "20150218"; into something like Date newDate; newDate = "20150218"; All inequality operators turn Date objects into
   integers and compare them. (Most recent git push to newDate_h branch)
   
-  20150219 - (John) Created two classes for the assigned and completed assignments. Changed the assignment.h to a struct. Created a linked list class. Looked at the doubly linked list source code on blakcboard and implemented functions needed. Removed non necessary files or duplicates. 
+  20150219 - (John) Created two classes for the assigned and completed assignments. Changed the assignment.h to a struct. Created a linked list class. Looked at the doubly linked list source code on blakcboard and implemented functions needed. Removed non necessary files or duplicates.
+
+  20150221 - (Eric) Separated Date.h into Date.h and Date.cpp for copmpiling ease. Tested with testDate() function in main.
+  Changed isLate in Assignment to enum status {ASSIGNED, COMPLETED, LATE} as suggested on assignment sheet.
+  Gave menu.cpp a menu.h file because the linker wanted to kill me
+  Wrote a temporary readFile() function in menu.cpp that works with the current methods. It will need a parser to read the expected input.
+  For simplicity in figuring out menus and whatnot, I changed the input lines to the format
+	YYYYMMDD oneworddescription YYYYMMDD STATUS
+	We'll have to write or use a parser to get strings out from between the commas but I think it's good for now
+  Wrote print list function that prints a STL list of Assignment objects with my date class.
+  While including Assignment.h, Date.cpp, Date.h, main.cpp, menu.cpp, menu.h in my project, it compiled and I
+	was able to navigate to the displaySubmenu and print both assigned and completed lists.
+  I should write a function for my Date class to convert the Date into a string and use that for the << operator so
+	it can be used with iomanip things.
