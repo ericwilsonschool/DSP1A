@@ -1,62 +1,79 @@
-//Eric Wilson
-//#include "Date.h"
-//#include "linked_list.cpp"
 #include "menu.cpp"
+#include "Date.h"
 #include <list>
- //#include "menu.cpp"
 
-using namespace std;//Can you see this?Shit.
-//void print_list(const linked_list<int>& li){
-//    
-//    linked_list<int>::iterator iter = li.begin();
-//    
-//    while (iter != li.end()){
-//        cout << *iter;
-//        ++iter;
-//        if (iter != li.end())
-//            cout << " ===> ";
-//    }
-//    
-//    cout << '\n';
-//}
+using namespace std;
+
+//Function Prototypes
+void testDate();
 
 int main()
 {
-    mainMenu();
-//  Date newDate; //Default constructor
-//  newDate = "20150218"; //assignment operator
-//  Date newDate2;
-//  newDate2 = "19991231";
-    
-    
-    
-//    list <int> test;
-//    test.push_front(1);
-//    test.push_front(2);
-//    test.push_front(3);
-//    
-//    for(list <int> :: iterator iter = test.begin(); iter != test.end(); iter++)
-//    {
-//        cout << *iter << endl;
-//    }
-  
-//  cout << newDate2.toInt() << endl;
-//  cout << newDate << " > " << newDate2 << ": " << (newDate > newDate2) << endl;
+	cout << "DSProject1A: Homework Tracker\n";
 
-//    linked_list <int> test = new linked_list <int>; //COPY CONSTRUCTORRRRRRRR
-//    test.add_node(1234);
-//    test.add_node(5678);
-//    test.print_list();
-  
-  //cout << "newDate: " << newDate << ' ' << "newDate2: " << newDate2 << endl; //stream insertion operator
-  //cout << "newDate > newDate2: " << (newDate > newDate2) << endl;
-  //cout << "newDate < newDate2: " << (newDate < newDate2) << endl;  
-  
-  //newDate2 = newDate; //they can even be made equal to eachother!
+	testDate();
+    //mainMenu();
+	system("pause");
+	return 0;
+}
 
-  //cout << "newDate: " << newDate << ' ' << "newDate2: " << newDate2 << endl; //stream insertion operator
-  //cout << "newDate >= newDate2: " << newDate >= newDate2 << endl;
-  //cout << "newDate <= newDate2: " << newDate <= newDate2 << endl; 
-  
-  return 0;
+void testDate()
+{
+	Date test1;//test default constructor
+	Date test2 = "20150211";//test assignment from string constructor
+
+	cout << "test1: " << test1 << '\n';
+	//test stream insertion
+		//Exp: 00000000
+	cout << "test2: " << test2 << '\n';
+	//test stream insertion
+		//Exp: 20150211
+	cout << "test1 > test2: " << (test1 > test2) << '\n';
+	//test > operator
+		//Exp: 1
+	cout << "test1 < test2: " << (test1 < test2) << '\n';
+	//test < operator
+		//Exp: 0
+	cout << "test1 >= test2: " << (test1 >= test2) << '\n';
+	//test >= operator
+		//Exp: 1
+	cout << "test1 <= test2: " << (test1 <= test2) << '\n';
+	//test <= operator
+		//Exp: 0
+
+	test1 = "20010911";
+	//test assignment from string operator
+	test2 = test1;
+	//test assignment from Date operator
+	cout << "test1: " << test1 << "\ntest2: " << test2 << '\n';
+	//test for successful assignment
+		// Exp: test1: 20010911
+			  //test2: 20010911
+
+	cout << "test1 > test2: " << (test1 > test2) << '\n';
+	//test > operator
+	//Exp: 0
+	cout << "test1 < test2: " << (test1 < test2) << '\n';
+	//test < operator
+	//Exp: 0
+	cout << "test1 >= test2: " << (test1 >= test2) << '\n';
+	//test >= operator
+	//Exp: 1
+	cout << "test1 <= test2: " << (test1 <= test2) << '\n';
+	//test <= operator
+	//Exp: 1
+
+	//Total expected output of testDate()
+		//test1: 00000000
+		//test2: 20150211
+		//test1 > test2: 1
+		//test1 < test2: 0
+		//test1 >= test2: 1
+		//test1 <= test2: 0
+		//test1: 20010911
+		//test2: 20010911
+		//test1 > test2: 0
+		//test1 < test2: 0
+		//test1 >= test2: 1
+		//test1 <= test2: 1
 }
