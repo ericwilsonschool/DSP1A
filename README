@@ -45,3 +45,5 @@ CHANGES
 
   20150227 - (Eric) Upgraded file reading functions to parse format specified on assignment since that's probably what they'll use
   while grading. Also added parseDate(string) function to menu to convert to a usable format.
+  Changed << operator on Date class to simply convert the date to an integer and inject the result into the stream. It should now work with iomanip
+  functions.

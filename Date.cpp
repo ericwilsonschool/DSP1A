@@ -130,9 +130,7 @@ bool Date::operator>=(const Date& rhs){
 }
 ostream& operator<< (ostream& out, Date& date)
 {
-	out << setfill('0') << setw(4) << date.y
-		<< setfill('0') << setw(2) << date.m
-		<< setfill('0') << setw(2) << date.d;
+	out << date.toInt();
 	return out;
 }
 bool Date::operator==(const int& other)
