@@ -42,3 +42,6 @@ CHANGES
   I should write a function for my Date class to convert the Date into a string and use that for the << operator so
 	it can be used with iomanip things.
   Added a ==int operator to Date class basically to tell if a date is blank. if (Date == 0) then it's blank
+
+  20150227 - (Eric) Upgraded file reading functions to parse format specified on assignment since that's probably what they'll use
+  while grading. Also added parseDate(string) function to menu to convert to a usable format.
