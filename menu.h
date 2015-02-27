@@ -13,5 +13,7 @@ void addSubmenu();
 void editSubmenu();
 void readFile(ifstream& fin, list <Assignment>& completed, list <Assignment>& assigned);
 void printList(list<Assignment> assList);
+void parseInput(string& dueDate, string& description, string& assignedDate, string& status, const string line);
+string parseDate(string date);//accepts input of form M-D-Y and returns YYYYMMDD
 
 #endif
