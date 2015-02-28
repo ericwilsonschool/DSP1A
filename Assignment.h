@@ -17,9 +17,9 @@ struct Assignment{
 	{
 		assigned = "20150101";
 		dueDate = "20151231";
-		completed = "20150817";
 		description = "Empty constructor";
 		status = ASSIGNED;
+
 	}
 	Assignment(Date p_assigned, Date p_due, string p_description, Assignment::Status p_status)
 	{

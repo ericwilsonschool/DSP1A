@@ -140,3 +140,9 @@ bool Date::operator==(const int& other)
 	else
 		return false;
 }
+bool Date::operator==(const Date& other){
+	if (this->toInt() == other.toInt())
+		return true;
+	else
+		return false;
+}

@@ -33,7 +33,7 @@ void mainMenu(){
  		displaySubmenu(completed, assigned);
  		break;
  		case '2': //Add Assignments
- 		addSubmenu();
+ 		addSubmenu(completed, assigned);
  		break;
  		case '3': //Edit assignments
  		editSubmenu();
@@ -114,21 +114,22 @@ void displaySubmenu(list<Assignment> & completed, list<Assignment>& assigned){
         }
     }
 
-void addSubmenu(){
+void addSubmenu(list<Assignment>& completed, list<Assignment>& assigned){
     char menuSelection;
 
-while (1){//dangerous retard code
-    cout << "\nGENERIC SUBMENU:\n1. Add completed\t\t2. Add assigned\n"
+ while (1){//dangerous retard code
+    cout << "\nADD ASSIGNMENT:\n1. Add completed\t\t2. Add assigned\n"
     << "0. Back\n";
 
     cin >> menuSelection;
 
     switch (menuSelection){
     	case '1':
-    	cout << "This is add completed!\n";
+			addAssignment(completed, 1);
     	break;
-    	case '2':
-    	cout << "This is add assigned!\n";
+		case '2':{
+			addAssignment(assigned, 0);
+		}
     	break;
     	case '0':
             return;//exit to previous menu
@@ -187,14 +188,15 @@ void printList(list<Assignment> assList)//teehee
 	}
 	else
 	{	//print collumn headers
-		cout << "ASSIGNED   DESCRIPTION             COMPLETED  STATUS\n";
+		cout << "ASSIGNED   DESCRIPTION             DUE       COMPLETED  STATUS\n";
 		//iterate through list printing and stuff.
 		for (list<Assignment>::iterator iter = assList.begin(); iter != assList.end(); ++iter)
 		{
 			//Print assigned date and description
 			cout << iter->assigned << "   "
-			<< setfill(' ') << left
-			<< setw(24) << iter->description;
+				<< setfill(' ') << left
+				<< setw(24) << iter->description
+				<< setw(10) << iter->dueDate;
 			//print completed date
 			if (iter->completed == 0)
 				cout << "N/A        ";
@@ -253,4 +255,177 @@ string parseDate(string date)
 	cout << returnDate;
 
 	return returnDate; //returns format YYYYMMDD
+}
+//assAssignment is dual function. Behaves differently depending on bool parameter.
+void addAssignment(list<Assignment>& theList, bool isCompleted){
+	Date assigned, due;
+	string date, description, status;
+	char statChar;
+	bool inserted = false;
+
+	//menu header
+	if (isCompleted == 1)
+		cout << "ADD COMPLETED ASSIGNMENT:\n";
+	else
+		cout << "ADD NEW ASSIGNMENT:\n";
+	while (1){//loop hassles user until they finally enter a valid date
+		cout << "Please enter assigned date(YYYYMMDD): ";
+		cin.ignore(256, '\n');
+		getline(cin, date);//get input
+		//test 
+		if (isValidStr(date)){
+			assigned = date;//we have our assigned date
+			cout << '\n';
+			break;
+		}
+		else if (assDateExists(theList, date)){
+			cout << "An assignment with that date already exists in the list.\n";
+			continue;
+		}
+		else{
+			cout << "Invalid date. Please try again.\n ";
+			continue;
+		}	
+	}
+	while (1){ //hassles user for description
+		cout << "Please enter description (<=24 characters): ";
+		getline(cin, description);
+		if (description.length() < 25){
+			cout << '\n';
+			break;
+		}
+		else{
+			cout << "Too many characters.\n ";
+			continue;
+		}
+	}
+
+	while (1){//hassles user for due date
+		cout << "Please enter due date(YYYYMMDD): ";
+		getline(cin, date);
+		if (isValidStr(date)){
+			due = date;
+			cout << '\n';
+			break;
+		}
+		else{
+			cout << "Invalid date. Please try agian.\n";
+			continue;
+		}
+	}
+	Assignment newAssignment;
+	while (1){//hassles user for status unless we're adding an ASSIGNED object
+		if (isCompleted == 1)
+		cout << "Please enter status\nC = Completed\nL = Late\nStatus: ";
+		else{//if we're adding an ASSIGNED type, we know what the status will be
+			newAssignment.assigned = assigned;
+			newAssignment.dueDate = due;
+			newAssignment.description = description;
+			newAssignment.status = Assignment::Status::ASSIGNED;
+			break;
+		}
+		cin >> statChar;
+		if (statChar == 'C' || statChar == 'c'){
+			newAssignment.assigned = assigned;
+			newAssignment.dueDate = due;
+			newAssignment.description = description;
+			newAssignment.status = Assignment::Status::COMPLETED;
+			break;
+		}
+		else if (statChar == 'L' || statChar == 'l'){
+			newAssignment.assigned = assigned;
+			newAssignment.dueDate = due;
+			newAssignment.description = description;
+			newAssignment.status = Assignment::Status::LATE;
+			break;
+		}
+		else{//incorrect input
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "Invalid selection!\n";
+			continue;
+		}		
+	}
+	//insert new object into list
+	if (theList.empty() /*|| newAssignment.dueDate > (theList.end()).dueDate*/){
+
+		theList.push_back(newAssignment);
+		inserted = true;
+		cout << "Assignment added to list!\n";
+	}
+	else
+		for (list<Assignment>::iterator iter = theList.begin(); iter != theList.end();){
+		if (newAssignment.dueDate < iter->dueDate){
+			cout << "Assignment added to list!\n";
+			theList.insert(iter, newAssignment);
+			inserted = true;
+			}
+		++iter;
+		}
+	if (inserted == false)
+	{
+		theList.push_back(newAssignment);
+		cout << "Assignment added to list!\n";
+	}
+	return;
+}
+bool isValidStr(const string str){//tests validity of string passed as date.
+	int mo, dy;
+	if (str.length() != 8){//check for proper length
+		return false;
+	}
+	for (int i = 0; i < 8; ++i){//check if entire string is numeric
+		//assumes correct length since it got this far
+		if (!isdigit(str[i])){
+			return false;
+		}
+	}
+	mo = stoi(str.substr(4, 2));//get month as int
+	///*DEBUG*/cout << "mo: " << mo << '\n';
+	if (mo > 12 || mo < 1){//check for valid month
+		return false;
+	}
+	dy = stoi(str.substr(6, 2));//get day as int
+	///*DEBUG*/ cout << "dy: " << dy << '\n';
+	if (dy < 1){
+		return false;
+	}
+	//checks to see if dates have the appropriate number of days based on month
+	switch (mo){
+	case 1:
+	case 3:
+	case 5:
+	case 7:
+	case 8:
+	case 10:
+	case 12:
+		if (dy > 31){
+			return false;
+		}
+		else
+			break;
+	case 4:
+	case 6:
+	case 9:
+	case 11:
+		if (dy > 30){
+			return false;
+		}
+		else
+			break;
+	case 2:
+		if (dy > 28){
+			return false;
+		}
+		else
+			break;
+	}
+	return true;
+}
+bool assDateExists(list<Assignment> theList, Date date){
+	for (list<Assignment>::iterator iter = theList.begin(); iter != theList.end(); ++iter){
+		if (iter->dueDate == date)
+			return true;
+	}
+	return false;
 }

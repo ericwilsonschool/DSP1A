@@ -27,5 +27,6 @@ public:
 	bool operator>=(const Date& rhs);
 	friend ostream& operator<< (ostream& out, Date& date);
 	bool operator==(const int& other);
+	bool operator==(const Date& other);
 };
 #endif

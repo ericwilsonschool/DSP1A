@@ -49,3 +49,5 @@ CHANGES
   functions.
 
   20150228 - (Eric) Added a whole bunch of comments so you can understand what's going on.
+  Implemented addAssignment() function from addSubmenu. Operates differently depending on bool parameter
+  which specifies which list it is modifying. As of right now, it works if all input is as expected.
