@@ -262,7 +262,7 @@ void addAssignment(list<Assignment>& theList, bool isCompleted){
 	string date, description, status;
 	char statChar;
 	bool inserted = false;
-
+	cin.ignore(256, '\n');
 	//menu header
 	if (isCompleted == 1)
 		cout << "ADD COMPLETED ASSIGNMENT:\n";
@@ -270,7 +270,6 @@ void addAssignment(list<Assignment>& theList, bool isCompleted){
 		cout << "ADD NEW ASSIGNMENT:\n";
 	while (1){//loop hassles user until they finally enter a valid date
 		cout << "Please enter assigned date(YYYYMMDD): ";
-		cin.ignore(256, '\n');
 		getline(cin, date);//get input
 		//test 
 		if (isValidStr(date)){
@@ -303,7 +302,7 @@ void addAssignment(list<Assignment>& theList, bool isCompleted){
 	while (1){//hassles user for due date
 		cout << "Please enter due date(YYYYMMDD): ";
 		getline(cin, date);
-		if (isValidStr(date)){
+		if (isValidStr(date) && (stoi(date) > assigned.toInt())){
 			due = date;
 			cout << '\n';
 			break;
@@ -359,6 +358,7 @@ void addAssignment(list<Assignment>& theList, bool isCompleted){
 			cout << "Assignment added to list!\n";
 			theList.insert(iter, newAssignment);
 			inserted = true;
+			break;
 			}
 		++iter;
 		}
