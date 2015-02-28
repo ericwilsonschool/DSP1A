@@ -3,9 +3,10 @@
 void mainMenu(){
 	char menuSelection;
 	string file;
+	//create lists
 	list<Assignment> completed;
 	list <Assignment> assigned;
-
+	//open file
 	cout << "enter name of file to read assignements from: \n";
 	getline(cin, file);
 	ifstream fin (file);
@@ -16,10 +17,10 @@ void mainMenu(){
 		cout << "File " << file << "could not be opened.";
 		return;
 	}
-
+	//populate lists from file
 	readFile(fin, completed, assigned);
 
- while (1){ //Dangerous retard code 
+ while (1){ //infinite loop. exits when user selects 0
  	cout << "\nMAIN MENU\n1. View assignments\t\t2. Add assignments\n"
  	<< "3. Edit assignments\t\t4. Complete assignments\n"
  	<< "5. Check late assignments\t6. Save\n"
@@ -28,27 +29,27 @@ void mainMenu(){
  	cin >> menuSelection;
 
  	switch (menuSelection){
- 		case '1':
+ 		case '1'://View assignments
  		displaySubmenu(completed, assigned);
  		break;
- 		case '2': 
+ 		case '2': //Add Assignments
  		addSubmenu();
  		break;
- 		case '3':
+ 		case '3': //Edit assignments
  		editSubmenu();
  		break;
- 		case '4':
+ 		case '4': //Complete Assignments
  		cout << "This is completeing assignments!\n";
  		break;
- 		case '5':
+ 		case '5': //Check late assignments
  		cout << "This is late assignments!\n";
  		break;
- 		case '6':
+ 		case '6': //Save
  		cout << "This is save!\n";
  		break;
- 		case '0':
+ 		case '0': //Exit
  		return;
- 		default:
+ 		default: //Invalid selection
  		cin.clear();
  		cin.ignore(256, '\n');
  		cout << "Invalid selection!\n";
@@ -152,7 +153,7 @@ void readFile(ifstream& fin, list <Assignment>& completed, list <Assignment>& as
 
 	Date newDue = dueDate;
 	Date newAss = assignedDate;
-	if (status == "assigned")
+	if (status == "assigned")//decide which list to add to.
 	{
 		Assignment newAssignment(newAss, newDue, description, Assignment::Status::ASSIGNED);
 		assigned.push_back(newAssignment);
@@ -176,19 +177,21 @@ void readFile(ifstream& fin, list <Assignment>& completed, list <Assignment>& as
 return;
 }
 
-void printList(list<Assignment> assList)
+void printList(list<Assignment> assList)//teehee
 {
+	//check if the list is empty
 	if (assList.empty())
 	{
 		cout << "No assignments found.\n";
 		return;
 	}
 	else
-	{
+	{	//print collumn headers
 		cout << "ASSIGNED   DESCRIPTION             COMPLETED  STATUS\n";
+		//iterate through list printing and stuff.
 		for (list<Assignment>::iterator iter = assList.begin(); iter != assList.end(); ++iter)
 		{
-			//setfill and stuff doesn't work on my date class at the moment
+			//Print assigned date and description
 			cout << iter->assigned << "   "
 			<< setfill(' ') << left
 			<< setw(24) << iter->description;
@@ -215,20 +218,18 @@ void parseInput(string& dueDate, string& description, string& assignedDate, stri
 	//get the date from the line
 	tempDate = line.substr(0, line.find_first_of(','));
 	dueDate = parseDate(tempDate);
+	//delete first date and ", " from string
 	line.erase(0, line.find_first_of(',') + 2);
-	cout << dueDate << ' ';
 	//get the description
 	description = line.substr(0, line.find_first_of(','));
+	
 	line.erase(0, line.find_first_of(',') + 2);
-	cout << description << ' ';
 	//get the other date
 	tempDate = line.substr(0, line.find_first_of(','));
 	assignedDate = parseDate(tempDate);
 	line.erase(0, line.find_first_of(',') + 2);
-	cout << assignedDate << ' ';
 	//get the status
 	status = line;
-	cout << status << '\n';
 	
 	return;
 	
@@ -236,6 +237,7 @@ void parseInput(string& dueDate, string& description, string& assignedDate, stri
 
 string parseDate(string date)
 {
+	//create temp variables
 	string year, month, day, returnDate;
 	month = date.substr(0, date.find_first_of('-'));
 	date.erase(0, date.find_first_of('-')+1);
@@ -250,5 +252,5 @@ string parseDate(string date)
 	returnDate = year + month + day;
 	cout << returnDate;
 
-	return returnDate;
+	return returnDate; //returns format YYYYMMDD
 }

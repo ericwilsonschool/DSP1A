@@ -47,3 +47,5 @@ CHANGES
   while grading. Also added parseDate(string) function to menu to convert to a usable format.
   Changed << operator on Date class to simply convert the date to an integer and inject the result into the stream. It should now work with iomanip
   functions.
+
+  20150228 - (Eric) Added a whole bunch of comments so you can understand what's going on.
