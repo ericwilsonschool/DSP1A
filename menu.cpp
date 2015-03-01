@@ -19,6 +19,7 @@ void mainMenu(){
 	}
 	//populate lists from file
 	readFile(fin, completed, assigned);
+	fin.close();
 
  while (1){ //infinite loop. exits when user selects 0
  	cout << "\nMAIN MENU\n1. View assignments\t\t2. Add assignments\n"
@@ -45,7 +46,7 @@ void mainMenu(){
  		cout << "This is late assignments!\n";
  		break;
  		case '6': //Save
- 		cout << "This is save!\n";
+ 		save(file, assigned, completed);
  		break;
  		case '0': //Exit
  		return;
@@ -252,7 +253,6 @@ string parseDate(string date)
 	if (day.length() < 2)
 		day = '0' + day;
 	returnDate = year + month + day;
-	cout << returnDate;
 
 	return returnDate; //returns format YYYYMMDD
 }
@@ -428,4 +428,32 @@ bool assDateExists(list<Assignment> theList, Date date){
 			return true;
 	}
 	return false;
+}
+void save(string fileName, list<Assignment> assigned, list<Assignment> completed){
+	ofstream fout;
+	fout.open(fileName);
+	//print completed list to file
+	for (list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter)
+	{
+		fout << iter->assigned.toFileString() << ", "
+			<< iter->description << ", "
+			<< iter->dueDate.toFileString() << ", ";
+		if (iter->status == Assignment::Status::COMPLETED)
+			fout << "completed\n";
+		else if (iter->status == Assignment::Status::LATE)
+			fout << "late\n";
+	}
+	//print assigned list to file
+	for (list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter)
+	{
+		fout << iter->assigned.toFileString() << ", "
+			<< iter->description << ", "
+			<< iter->dueDate.toFileString() << ", "
+			<< "assigned";
+		++iter;
+		if (iter != assigned.end())//make sure there's no trailing nonsense
+			fout << '\n';
+		--iter;
+	}
+	fout.close();
 }

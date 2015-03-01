@@ -17,7 +17,7 @@ public:
 	int toInt()const;//Converts Date object to integer in the form of YYYYMMDD
 		//Used in inequality operator functions
 	bool isValidString(const string str);//tests validity of date passed as string.
-
+	string toFileString();
 ////OPERATORS////{=Date, =string, >, <, <=, >=, <<}
 	Date& operator=(const Date& rhs);
 	Date& operator=(const string& other);

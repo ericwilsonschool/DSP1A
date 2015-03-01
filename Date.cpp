@@ -79,6 +79,11 @@ bool Date::isValidString(const string str){//tests validity of string passed as 
 	}
 	return true;
 }
+string Date::toFileString(){
+	string returnString = "";
+	returnString = returnString + to_string(m) + '-' + to_string(d) + '-' + to_string(y);
+	return returnString;
+}
 //OPERATORS
 Date& Date::operator=(const Date& rhs){//OL Assignment
 	//check if they're the same
