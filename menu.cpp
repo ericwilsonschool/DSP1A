@@ -43,7 +43,7 @@ void mainMenu(){
  		cout << "This is completeing assignments!\n";
  		break;
  		case '5': //Check late assignments
- 		cout << "This is late assignments!\n";
+			checkLate(completed);
  		break;
  		case '6': //Save
  		save(file, assigned, completed);
@@ -194,7 +194,7 @@ void printList(list<Assignment> assList)//teehee
 		for (list<Assignment>::iterator iter = assList.begin(); iter != assList.end(); ++iter)
 		{
 			//Print assigned date and description
-			cout << iter->assigned << "   "
+			cout << ' ' << iter->assigned << "   "
 				<< setfill(' ') << left
 				<< setw(24) << iter->description
 				<< setw(10) << iter->dueDate;
@@ -457,4 +457,17 @@ void save(string fileName, list<Assignment> assigned, list<Assignment> completed
 	}
 	fout.close();
 	cout << "Changes saved to " << fileName << "!\n";
+}
+void checkLate(list<Assignment> completed){
+	int count = 0;
+	cout << "LATE ASSIGNMENTS:\nASSIGNED   DESCRIPTION             DUE\n";
+	for (list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter){
+		if (iter->status == Assignment::Status::LATE){
+			cout << ' ' << left << setw(11) << iter->assigned
+				<< left << setw(24) << iter->description
+				<< left << setw(10) << iter->dueDate << '\n';
+			++count;
+		}
+	}
+	cout << count << " late assignments found.\n";
 }

@@ -22,4 +22,5 @@ void addAssignment(list<Assignment>& theList, bool isCompleted);
 bool isValidStr(const string str);
 bool assDateExists(list<Assignment> theList, Date date);
 void save(string fileName, list<Assignment> assigned, list<Assignment> completed);
+void checkLate(list<Assignment> completed);
 #endif
