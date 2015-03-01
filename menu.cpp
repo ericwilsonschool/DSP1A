@@ -456,4 +456,5 @@ void save(string fileName, list<Assignment> assigned, list<Assignment> completed
 		--iter;
 	}
 	fout.close();
+	cout << "Changes saved to " << fileName << "!\n";
 }
