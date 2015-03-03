@@ -483,7 +483,7 @@ void editDate(list<Assignment> &completed, list<Assignment> &assigned) {
         }
         j++;
       }
-      else {
+    } else {
         cout << "Error! Invalid date!";
       }
 
@@ -509,7 +509,7 @@ void editDate(list<Assignment> &completed, list<Assignment> &assigned) {
           }
           j++;
         }
-        else {
+    }else {
           cout << "Error! Invalid date!";
         }
 
