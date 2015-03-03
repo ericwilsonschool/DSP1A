@@ -472,9 +472,9 @@ void editDate(list<Assignment> &completed, list<Assignment> &assigned) {
     cout << "Which assignment would you like to edit? ";
     cin >> completedSelection;
     Cout << "What date would you like to change it too? ";
-    getline(cin, completedSelection);
-            if(isValidStr(completedSelection == true){
-      Date newCompDate(completedSelection);
+    getline(cin, completedChange);
+            if(isValidStr(completedChange == true){
+      Date newCompDate(completedChange);
       int j = 0;
       for (list<Assignment>::iterator iter = completed.begin();
            iter != completed.end(); ++iter) {
@@ -498,9 +498,9 @@ void editDate(list<Assignment> &completed, list<Assignment> &assigned) {
       cout << "Which assignment would you like to edit? ";
       cin >> assignedSelection;
       Cout << "What date would you like to change it too? ";
-      getline(cin, assignedSelection);
-                if(isValidStr(assignedSelection == true){
-        Date newAssDate(assignedSelection);
+      getline(cin, assignedChange);
+                if(isValidStr(assignedChange == true){
+        Date newAssDate(assignedChange);
         int j = 0;
         for (list<Assignment>::iterator iter = completed.begin();
              iter != completed.end(); ++iter) {
