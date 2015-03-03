@@ -40,7 +40,7 @@ void mainMenu(){
  		editSubmenu(completed, assigned);
  		break;
  		case '4': //Complete Assignments
- 		cout << "This is completeing assignments!\n";
+ 		completeSubmenu(completed, assigned);
  		break;
  		case '5': //Check late assignments
 			checkLate(completed);
@@ -472,7 +472,7 @@ void checkLate(list<Assignment> completed){
 	cout << count << " late assignments found.\n";
 }
 
-void editDate(list <Assignment> completed, list <Assignment> assigned){
+void editDate(list <Assignment>& completed, list <Assignment>& assigned){
     cout << "1. Edit completed\t\2. Edit assigned\n"
     << "0. Back\n";
     int editSelection, completedSelection, assignedSelection;
@@ -532,7 +532,7 @@ void editDate(list <Assignment> completed, list <Assignment> assigned){
     }
 }
 
-void editDescription(list <Assignment> completed, list <Assignment> assigned){
+void editDescription(list <Assignment>& completed, list <Assignment>& assigned){
     cout << "1. Edit completed\t\2. Edit assigned\n"
     << "0. Back\n";
     int editSelection, completedSelection, assignedSelection;
@@ -590,5 +590,27 @@ void editDescription(list <Assignment> completed, list <Assignment> assigned){
             menuSelection = '0';
             break; //restarts while(1) loop
     }
+}
+
+void completeSubmenu(list <Assignment>& completed, list <Assignment>& assigned){
+    int i = 0, editSelection;
+    for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+        cout << "Assignement "+ i +" " << iter->description << endl;
+        i++
+    }
+    cout << "Which assignment is completed? ";
+    cin >> editSelection
+    
+    int j = 0;
+    for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+        if(editSelection == j){
+            completed.push_back(iter->Assignment);
+            assigned.remove(iter->Assignement);
+        }
+        j++
+    }
+    
+    
+    
 }
 }
