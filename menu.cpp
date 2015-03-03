@@ -37,7 +37,7 @@ void mainMenu(){
  		addSubmenu(completed, assigned);
  		break;
  		case '3': //Edit assignments
- 		editSubmenu();
+ 		editSubmenu(completed, assigned);
  		break;
  		case '4': //Complete Assignments
  		cout << "This is completeing assignments!\n";
@@ -62,7 +62,7 @@ void mainMenu(){
 void editSubmenu(){
 	char menuSelection;
 
-  while (1){//dangerous retard code    
+  while (1){
   	cout << "\nGENERIC SUBMENU:\n1. Edit due date\t\t2. Edit description\n"
   	<< "0. Back\n";
 
@@ -70,10 +70,10 @@ void editSubmenu(){
 
   	switch (menuSelection){
   		case '1':
-  		cout << "This is edit due date!\n";
+  		editDate(completed, assigned);
   		break;
   		case '2':
-  		cout << "This is edit description";
+  		editDescription(completed, assigned);
   		break;
   		case '0':
         return;//exit to previous menu
@@ -90,7 +90,7 @@ void editSubmenu(){
 void displaySubmenu(list<Assignment> & completed, list<Assignment>& assigned){
 	char menuSelection;
 
-    while (1){//dangerous retard code
+    while (1){
     	cout << "\nDISPLAY MENU:\n1. Display completed\t\t2. Display assigned\n"
     	<< "0. Back\n";
 
@@ -118,7 +118,7 @@ void displaySubmenu(list<Assignment> & completed, list<Assignment>& assigned){
 void addSubmenu(list<Assignment>& completed, list<Assignment>& assigned){
     char menuSelection;
 
- while (1){//dangerous retard code
+ while (1){
     cout << "\nADD ASSIGNMENT:\n1. Add completed\t\t2. Add assigned\n"
     << "0. Back\n";
 
@@ -470,4 +470,125 @@ void checkLate(list<Assignment> completed){
 		}
 	}
 	cout << count << " late assignments found.\n";
+}
+
+void editDate(list <Assignment> completed, list <Assignment> assigned){
+    cout << "1. Edit completed\t\2. Edit assigned\n"
+    << "0. Back\n";
+    int editSelection, completedSelection, assignedSelection;
+    Date completedChange, assignedChange;
+  
+    cin >> editSelection
+    
+    switch (editSelection){
+        case '1':
+            int i = 0;
+            for(list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter){
+                cout << "Assignement "+ i +" " << iter->dueDate << endl;
+                i++
+            }
+            cout << "Which assignment would you like to edit? ";
+            cin >> completedSelection
+            Cout << "What date would you like to change it too? ";
+            cin >> completedChange
+            int j = 0;
+            for(list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter){
+                if(completedSelection == j ){
+                    iter->dueDate = completedChange;
+                }
+                j++
+            }
+            
+            
+            break;
+        case '2':
+            int i = 0;
+            for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+                cout << "Assignement "+ i +" " << iter->dueDate << endl;
+                i++
+            }
+            cout << "Which assignment would you like to edit? ";
+            cin >> assignedSelection
+            Cout << "What date would you like to change it too? ";
+            cin >> assignedChange
+            int j = 0;
+            for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+                if(completedSelection == j ){
+                    iter->dueDate = assignedChange;
+                }
+                j++
+            }
+            
+        
+            break;
+        case '0':
+            return;//exit to previous menu
+        default:
+            cin.clear();
+            cin.ignore(256, '\n');
+            cout << "Invalid selection!\n";
+            menuSelection = '0';
+            break; //restarts while(1) loop
+    }
+}
+
+editDescription(list <Assignment> completed, list <Assignment> assigned){
+    cout << "1. Edit completed\t\2. Edit assigned\n"
+    << "0. Back\n";
+    int editSelection, completedSelection, assignedSelection;
+    string completedChange, assignedChange;
+    
+    cin >> editSelection
+    
+    switch (editSelection){
+        case '1':
+            int i = 0;
+            for(list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter){
+                cout << "Assignement "+ i +" " << iter->description << endl;
+                i++
+            }
+            cout << "Which assignment would you like to edit? ";
+            cin >> completedSelection
+            Cout << "What do you want the new description to be? ";
+            cin >> completedChange
+            int j = 0;
+            for(list<Assignment>::iterator iter = completed.begin(); iter != completed.end(); ++iter){
+                if(completedSelection == j ){
+                    iter->description = completedChange;
+                }
+                j++
+            }
+            
+            
+            break;
+        case '2':
+            int i = 0;
+            for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+                cout << "Assignement "+ i +" " << iter->description << endl;
+                i++
+            }
+            cout << "Which assignment would you like to edit? ";
+            cin >> assignedSelection
+            Cout << "What do you want the new description to be? ";
+            cin >> assignedChange
+            int j = 0;
+            for(list<Assignment>::iterator iter = assigned.begin(); iter != assigned.end(); ++iter){
+                if(completedSelection == j ){
+                    iter->description = assignedChange;
+                }
+                j++
+            }
+            
+            
+            break;
+        case '0':
+            return;//exit to previous menu
+        default:
+            cin.clear();
+            cin.ignore(256, '\n');
+            cout << "Invalid selection!\n";
+            menuSelection = '0';
+            break; //restarts while(1) loop
+    }
+}
 }
