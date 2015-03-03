@@ -10,7 +10,7 @@ using namespace std;
 void mainMenu(); //First thing user sees after opening file
 void displaySubmenu(list<Assignment> & completed, list<Assignment>& assigned);//used to view saved assignments
 void addSubmenu(list<Assignment>& completed, list<Assignment>& assigned);
-void editSubmenu();
+void editSubmenu(list <Assignment>& completed, list <Assignment>& assigned);
 //Readfile assumes all assignments in file are ordered
 //since we'll be writing ordered lists to it
 void readFile(ifstream& fin, list <Assignment>& completed, list <Assignment>& assigned);
