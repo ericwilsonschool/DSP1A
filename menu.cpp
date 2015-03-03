@@ -598,14 +598,17 @@ void completeSubmenu(list <Assignment>& completed, list <Assignment>& assigned){
       int j = 0;
       for (list<Assignment>::iterator iter = assigned.begin();
            iter != assigned.end(); ++iter) {
-        if (editSelection == j) {
-          completed.push_back(iter->Assignment);
-          assigned.remove(iter->Assignement);
+          if (editSelection == j) {
+              for(list<Assignment>::iterator iter2 = completed.begin(); iter != completed.end(); ++iter){
+                  if(iter->dueDate < iter2->dueDate){
+                      Assignment insert = new Assignment(iter->assigned, iter->dueDate, iter->description, Assignment::Status::COMPLETED);
+                      completed.insert(iter2,insert);
+                      assigned.erase(iter);
+                  }
+              }
+          }
+          j++;
         }
-        j++;
-      }
-    
-    
-    
+    }
 }
-  }
+  
