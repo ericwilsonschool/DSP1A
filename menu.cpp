@@ -532,7 +532,7 @@ void editDate(list <Assignment> completed, list <Assignment> assigned){
     }
 }
 
-editDescription(list <Assignment> completed, list <Assignment> assigned){
+void editDescription(list <Assignment> completed, list <Assignment> assigned){
     cout << "1. Edit completed\t\2. Edit assigned\n"
     << "0. Back\n";
     int editSelection, completedSelection, assignedSelection;

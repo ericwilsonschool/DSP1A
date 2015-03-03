@@ -23,4 +23,6 @@ bool isValidStr(const string str);
 bool assDateExists(list<Assignment> theList, Date date);
 void save(string fileName, list<Assignment> assigned, list<Assignment> completed);
 void checkLate(list<Assignment> completed);
+void editDate(list <Assignment> completed, list <Assignment> assigned);
+void editDescription(list <Assignment> completed, list <Assignment> assigned);
 #endif
